@@ -51,6 +51,9 @@ class YOLOLoss(nn.Module):
             mask, noobj_mask = mask.cuda(), noobj_mask.cuda()
             tx, ty, tw, th = tx.cuda(), ty.cuda(), tw.cuda(), th.cuda()
             tconf, tcls = tconf.cuda(), tcls.cuda()
+            # mask, noobj_mask = mask, noobj_mask
+            # tx, ty, tw, th = tx, ty, tw, th
+            # tconf, tcls = tconf, tcls
             #  losses.
             loss_x = self.bce_loss(x * mask, tx * mask)
             loss_y = self.bce_loss(y * mask, ty * mask)
@@ -67,8 +70,11 @@ class YOLOLoss(nn.Module):
             return loss, loss_x.item(), loss_y.item(), loss_w.item(),\
                 loss_h.item(), loss_conf.item(), loss_cls.item()
         else:
+            # FloatTensor = torch.cuda.FloatTensor if x.is_cuda else torch.FloatTensor
+            # LongTensor = torch.cuda.LongTensor if x.is_cuda else torch.LongTensor
             FloatTensor = torch.cuda.FloatTensor if x.is_cuda else torch.FloatTensor
             LongTensor = torch.cuda.LongTensor if x.is_cuda else torch.LongTensor
+
             # Calculate offsets for each grid
             grid_x = torch.linspace(0, in_w-1, in_w).repeat(in_w, 1).repeat(
                 bs * self.num_anchors, 1, 1).view(x.shape).type(FloatTensor)

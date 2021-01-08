@@ -17,7 +17,9 @@ import torch.nn.functional as F
 from tensorboardX import SummaryWriter
 
 MY_DIRNAME = os.path.dirname(os.path.abspath(__file__))
+# print(MY_DIRNAME)
 sys.path.insert(0, os.path.join(MY_DIRNAME, '..'))
+# print(MY_DIRNAME)
 # sys.path.insert(0, os.path.join(MY_DIRNAME, '..', 'evaluate'))
 from nets.model_main import ModelMain
 from nets.yolo_loss import YOLOLoss
@@ -42,6 +44,8 @@ def train(config):
     # Set data parallel
     net = nn.DataParallel(net)
     net = net.cuda()
+    # net = net
+
 
     # Restore pretrain model
     if config["pretrain_snapshot"]:
@@ -77,7 +81,7 @@ def train(config):
                                                          (config["img_w"], config["img_h"]),
                                                          is_training=True),
                                              batch_size=config["batch_size"],
-                                             shuffle=True, num_workers=32, pin_memory=True)
+                                             shuffle=True, num_workers=12, pin_memory=True)
 
     # Start the training loop
     logging.info("Start training.")

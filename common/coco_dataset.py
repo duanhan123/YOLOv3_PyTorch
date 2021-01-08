@@ -16,6 +16,8 @@ class COCODataset(Dataset):
         for path in open(list_path, 'r'):
             label_path = path.replace('images', 'labels').replace('.png', '.txt').replace(
                 '.jpg', '.txt').strip()
+            # print("e/PycharmProjects/YOLOv3_PyTorch/data/coco/images/val2014/COCO_val2014_000000581929.jpg")
+            # print(os.path.isfile("/e/PycharmProjects/YOLOv3_PyTorch/data/coco/images/val2014/COCO_val2014_000000581929.jpg"))
             if os.path.isfile(label_path):
                 self.img_files.append(path)
                 self.label_files.append(label_path)
