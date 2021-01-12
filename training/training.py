@@ -15,12 +15,15 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 from tensorboardX import SummaryWriter
+torch.backends.cudnn.enabled = False
 
 MY_DIRNAME = os.path.dirname(os.path.abspath(__file__))
 # print(MY_DIRNAME)
 sys.path.insert(0, os.path.join(MY_DIRNAME, '..'))
 # print(MY_DIRNAME)
 # sys.path.insert(0, os.path.join(MY_DIRNAME, '..', 'evaluate'))
+print(torch.version.cuda)
+# print(torch.version.cuda)
 from nets.model_main import ModelMain
 from nets.yolo_loss import YOLOLoss
 from common.coco_dataset import COCODataset
@@ -209,7 +212,7 @@ def main():
         logging.error("no params file found! path: {}".format(params_path))
         sys.exit()
     config = importlib.import_module(params_path[:-3]).TRAINING_PARAMS
-    config["batch_size"] *= len(config["parallels"])
+    # config["batch_size"] *= len(config["parallels"])
 
     # Create sub_working_dir
     sub_working_dir = '{}/{}/size{}x{}_try{}/{}'.format(
@@ -226,7 +229,7 @@ def main():
     logging.info("Please using 'python -m tensorboard.main --logdir={}'".format(sub_working_dir))
 
     # Start training
-    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(map(str, config["parallels"]))
+    # os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(map(str, config["parallels"]))
     train(config)
 
 if __name__ == "__main__":
