@@ -49,7 +49,7 @@ def evaluate(config):
                                                          (config["img_w"], config["img_h"]),
                                                          is_training=False),
                                              batch_size=config["batch_size"],
-                                             shuffle=False, num_workers=16, pin_memory=False)
+                                             shuffle=False, num_workers=12, pin_memory=False)
 
     # Start the eval loop
     logging.info("Start eval.")

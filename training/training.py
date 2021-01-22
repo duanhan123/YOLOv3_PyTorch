@@ -22,7 +22,7 @@ MY_DIRNAME = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(MY_DIRNAME, '..'))
 # print(MY_DIRNAME)
 # sys.path.insert(0, os.path.join(MY_DIRNAME, '..', 'evaluate'))
-print(torch.version.cuda)
+# print(torch.version.cuda)
 # print(torch.version.cuda)
 from nets.model_main import ModelMain
 from nets.yolo_loss import YOLOLoss

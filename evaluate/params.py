@@ -12,10 +12,10 @@ TRAINING_PARAMS = \
     },
     "batch_size": 16,
     "iou_thres": 0.5,
-    "val_path": "../data/coco/5k.txt",
-    "annotation_path": "../data/coco/annotations/instances_val2014.json",
+    "val_path": "../NEU-DET/val.txt",
+    "annotation_path": "",
     "img_h": 416,
     "img_w": 416,
     "parallels": [0],
-    "pretrain_snapshot": "../weights/official_yolov3_weights_pytorch.pth",
+    "pretrain_snapshot": "../darknet_53/size416x416_try0/20210122161111/model.pth",
 }

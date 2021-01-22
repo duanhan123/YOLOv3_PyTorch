@@ -14,10 +14,11 @@ class COCODataset(Dataset):
         self.img_files = []
         self.label_files = []
         for path in open(list_path, 'r'):
-            label_path = path.replace('images', 'labels').replace('.png', '.txt').replace(
+            # print(path)
+            label_path = path.replace('IMAGES', 'labels').replace('.png', '.txt').replace(
                 '.jpg', '.txt').strip()
-            # print("e/PycharmProjects/YOLOv3_PyTorch/data/coco/images/val2014/COCO_val2014_000000581929.jpg")
-            # print(os.path.isfile("/e/PycharmProjects/YOLOv3_PyTorch/data/coco/images/val2014/COCO_val2014_000000581929.jpg"))
+            # print(label_path)
+            # print(os.path.isfile("e:/PycharmProjects/YOLOv3_PyTorch/NEU-DET/labels/crazing_1.txt"))
             if os.path.isfile(label_path):
                 self.img_files.append(path)
                 self.label_files.append(label_path)
@@ -64,7 +65,7 @@ class COCODataset(Dataset):
 
 #  use for test dataloader
 if __name__ == "__main__":
-    dataloader = torch.utils.data.DataLoader(COCODataset("../data/coco/trainvalno5k.txt",
+    dataloader = torch.utils.data.DataLoader(COCODataset("../NEU-DET/train.txt",
                                                          (416, 416), True, is_debug=True),
                                              batch_size=2,
                                              shuffle=False, num_workers=1, pin_memory=False)
